@@ -29,9 +29,9 @@ def get_sample_name_from_file_name(file_name):
     return this_concentration
     
 #main for loop to import data into the data structure
-for filename in os.listdir("Intensities of Only Milk and Only Ink"):
+for filename in os.listdir("/home/akshat/Documents/Classes/HealResearch/HEAL-Research/Phantom_research/Intensities of Only Milk and Only Ink"):
     #open the data from the folder "V1 values" AS variable filename but save as f
-    with open(os.path.join("Intensities of Only Milk and Only Ink", filename), 'r') as f: # open in readonly mode
+    with open(os.path.join("/home/akshat/Documents/Classes/HealResearch/HEAL-Research/Phantom_research/Intensities of Only Milk and Only Ink", filename), 'r') as f: # open in readonly mode
         for i, line in enumerate(f):
             # change i > # of lines before data you need. gets rid of random text
             if i > 14:
@@ -240,6 +240,38 @@ error_empty_milk= error_empty.iloc[23:,:]
 
 #milk vs ink and empty vs nothing
 
+
+fig, (ax) = plt.subplots(nrows = 1, ncols = 1, sharex = False, sharey = False, figsize = (8, 8))
+"""
+helper.axes_labels("", "L", "Absorption Coefficient", "mm^-1", title = "Concentrations of Ink Zeroed With No Cuvette", ax = ax)
+fig.autofmt_xdate()
+for index, this_row in avg_data_nothing_ink_trans.iterrows():
+    #print(this_row)
+    ax.errorbar(mixture_label_ink,avg_data_nothing_ink[index], yerr = error_nothing_ink[index],  label = f"Wavelength = {index}")
+ax.legend(fontsize = "5",loc="upper left")
+helper.axes_labels("", "L", "", "mm^-1", title = "Concentrations of Milk Zeroed With No Cuvette", ax = ax)
+for index, this_row in avg_data_nothing_milk_trans.iterrows():  
+    #print(this_row)
+    ax.errorbar(mixture_label_milk,avg_data_nothing_milk[index], yerr = error_nothing_milk[index] , label = f"Wavelength = {index}")
+ax.legend(fontsize = "5",loc="upper left")
+helper.axes_labels("Amount of Ink", "L", "Absorption Coefficient", "mm^-1", title = "Concentrations of Ink Zeroed With an Empty Cuvette", ax = ax)
+for index, this_row in avg_data_empty_ink_trans.iterrows():  
+    #print(this_row)
+    ax.errorbar(mixture_label_ink,avg_data_empty_ink[index], yerr = error_empty_ink[index] , label = f"Wavelength = {index}")
+ax.legend(fontsize = "5",loc="upper left")
+"""
+helper.axes_labels("Amount of Milk", "L", "", "mm^-1", title = "Concentrations of Milk Zeroed With an Empty Cuvette", ax = ax)
+for index, this_row in avg_data_empty_milk_trans.iterrows():  
+    #print(this_row)
+    ax.errorbar(mixture_label_milk,avg_data_empty_milk[index], yerr = error_empty_milk[index]  ,label = f"Wavelength = {index}")
+ax.legend(fontsize = "5",loc="upper left")
+fig.suptitle('Absorption Coefficient of Aqueous Phantoms In Varying Concentrations')
+plt.show()
+plt.savefig("Concentrations of Ink Zeroed With No Cuvette.jpg")
+
+
+"""
+# Original plotting code block starts here (w four subplots)
 fig, (ax) = plt.subplots(nrows = 2, ncols = 2, sharex = False, sharey = False, figsize = (8, 8))
 helper.axes_labels("", "L", "Absorption Coefficient", "mm^-1", title = "Concentrations of Ink Zeroed With No Cuvette", ax = ax[0,0])
 fig.autofmt_xdate()
@@ -264,4 +296,4 @@ for index, this_row in avg_data_empty_milk_trans.iterrows():
 ax[1,1].legend(fontsize = "5",loc="upper left")
 fig.suptitle('Absorption Coefficient of Aqueous Phantoms In Varying Concentrations')
 plt.show()
-plt.savefig("Ink_and_Absorption_Test_1.jpg")
+plt.savefig("Ink_and_Absorption_Test_1.jpg")"""
